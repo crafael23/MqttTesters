@@ -15,7 +15,7 @@ client.on_connect = on_connect
 client.on_publish = on_publish
 
 # Conectarse al broker de Mosquitto en localhost
-client.connect("192.168.1.24", 1883, 60)
+client.connect("localhost", 1883, 60)
 
 # Publicar un mensaje de prueba en el tópico 'test'
 message = "Este es un mensaje de prueba"

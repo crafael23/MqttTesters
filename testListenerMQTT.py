@@ -18,7 +18,7 @@ client.on_connect = on_connect
 client.on_message = on_message
 
 # Conectarse al broker de Mosquitto en localhost
-client.connect("192.168.1.24", 1883)
+client.connect("localhost", 1883)
 
 # Mantener la conexión MQTT activa y esperar a recibir mensajes
 client.loop_forever()
