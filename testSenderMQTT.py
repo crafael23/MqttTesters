@@ -18,8 +18,8 @@ client.on_publish = on_publish
 client.connect("localhost", 1883, 60)
 
 # Publicar un mensaje de prueba en el tópico 'test'
-message = "Este es un mensaje de prueba"
-client.publish("test", message)
+message = '[1,2]'
+client.publish("ftf-input", message)
 
 # Mantener la conexión MQTT activa
 client.loop_forever()
