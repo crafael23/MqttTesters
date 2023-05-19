@@ -27,63 +27,41 @@ while True:
     #Agua
     ph= random.randint(1,100)
     nivel= random.choice([True, False])
-    tiempoA = datetime.datetime.now()
     dataA = {
         "ph": ph,
         "nivel": nivel,
-        "tiempo": tiempoA.strftime("%Y-%m-%d %H:%M:%S")
     }
     messageA = json.dumps(dataA)
-    client.publish("Reserva_Agua", messageA)
+    client.publish("Estado_Agua", messageA)
     
-    #Agua
+    #Riego
+    Modulo1=random.choice([True, False])
+    Modulo2=random.choice([True, False])
+    Modulo3=random.choice([True, False])
+    Modulo4=random.choice([True, False])
+    dataR= {
+        "Modulo1_estado": Modulo1,
+        "Modulo2_estado": Modulo2,
+        "Modulo3_estado": Modulo3,
+        "Modulo4_estado": Modulo4,
+    }
+    messageR = json.dumps(dataR)
+    client.publish("Estado_Riego", messageR)
+    
+    
+    #Modulo
     temperatura1 = random.randint(1,100)
     humedad1 = random.randint(1,100)
-    date1 = datetime.datetime.now()
+    id=1
     dataM1 = {
+        "Id": id,
         "temperatura": temperatura1,
-        "humedad": humedad1,
-        "tiempo": date1.strftime("%Y-%m-%d %H:%M:%S")        
+        "humedad": humedad1,       
     }
     message = json.dumps(dataM1)
-    client.publish("modulo1", message)
-    
-    
-    # temperatura2 = random.randint(1,100)
-    # humedad2 = random.randint(1,100)
-    # date2 = datetime.datetime.now()
-    # dataM2 = {
-    #     "temperatura": temperatura2,
-    #     "humedad": humedad2,
-    #     "tiempo": date2.strftime("%Y-%m-%d %H:%M:%S")
-    # }
-    # message2 = json.dumps(dataM2)
-    # client.publish("modulo2", message2)
-    
-    
-    # temperatura3 = random.randint(1,100)
-    # humedad3 = random.randint(1,100)
-    # date3 = datetime.datetime.now()
-    # dataM3 = {
-    #     "temperatura": temperatura3,
-    #     "humedad": humedad3,
-    #     "tiempo": date3.strftime("%Y-%m-%d %H:%M:%S")
-    # }
-    # message3 = json.dumps(dataM3)
-    # client.publish("modulo3", message3)
-    
-    # temperatura4= random.randint(1,100)
-    # humedad4 = random.randint(1,100)
-    # date4= datetime.datetime.now()
-    # dataM4={
-    #     "temperatura": temperatura4,
-    #     "humedad": humedad4,
-    #     "tiempo": date4.strftime("%Y-%m-%d %H:%M:%S")
-    # }
-    # message4 = json.dumps(dataM4)
-    # client.publish("modulo4", message4)
+    client.publish("Estado_Modulo", message)
 
-    time.sleep(5)
+    time.sleep(2)
 
 # Mantener la conexión MQTT activa
 client.loop_forever()
