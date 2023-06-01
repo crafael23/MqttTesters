@@ -1,24 +1,36 @@
+import time
 import paho.mqtt.client as mqtt
 
-# Definir la función de callback de conexión
+# MQTT broker details
+broker = "localhost"
+port = 1883
+topic = "TestTopic2"
+
+# Callback triggered when the client connects to the MQTT broker
 def on_connect(client, userdata, flags, rc):
-    print("Conectado con resultado de código: "+str(rc))
-    # Suscribirse al tópico 'test' después de conectarse
-    client.subscribe("test")
+    print("Connected to MQTT broker")
+    # Subscribe to the topic
+    client.subscribe(topic)
 
-# Definir la función de callback de recepción de mensajes
+# Callback triggered when a message is received
 def on_message(client, userdata, msg):
-    print("Mensaje recibido en el tópico 'test': "+msg.payload.decode())
+    # Print the received message
+    print("Received message: " + str(msg.payload.decode()))
+    
+    # Send a response message
+    time.sleep(4)
+    response = "This is a response"
+    client.publish(topic + "/response", response)
 
-# Crear una instancia de cliente MQTT
+# Create an MQTT client
 client = mqtt.Client()
 
-# Asignar las funciones de callback de conexión y recepción de mensajes
+# Set the callback functions
 client.on_connect = on_connect
 client.on_message = on_message
 
-# Conectarse al broker de Mosquitto en localhost
-client.connect("localhost", 1883)
+# Connect to the MQTT broker
+client.connect(broker, port, 60)
 
-# Mantener la conexión MQTT activa y esperar a recibir mensajes
+# Start the MQTT client loop (blocking call)
 client.loop_forever()
