@@ -33,7 +33,7 @@ while True:
     #     "nivel": nivel,
     # }
     # messageA = json.dumps(dataA)
-    # client.publish("Estado_Agua", messageA)
+    # client.publish("Reserva_Agua", messageA)
     
     # #Riego
     # Modulo1=random.choice([True, False])
@@ -53,14 +53,17 @@ while True:
     #Modulo1
     temperatura1 = random.randint(1,100)
     humedad1 = random.randint(1,100)
+    valvula= random.choice([True, False])
     id=1
     dataM1 = {
         "Id": id,
         "temperatura": temperatura1,
-        "humedad": humedad1,       
+        "humedad": humedad1,  
+        "valvula": valvula,
+            
     }
     message = json.dumps(dataM1)
-    client.publish("Estado_Modulo", message)
+    client.publish("modulo1", message)
 
     # #Modulo2
     # temperatura1 = random.randint(1,100)
